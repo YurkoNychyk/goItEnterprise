@@ -23,10 +23,25 @@ public class OperationsTimeTest {
 
         return System.currentTimeMillis() - startTime;
     }
-    public static  void doPopulate(ArrayList<Integer> testedCollection, int size) {
-        for (int i = 0; i < size; i++){
-            testedCollection.add(i);
+    public long testPopulate(Collection<Integer> collection, int collectionSize) {
+        startTime = System.currentTimeMillis();
+
+        if (collection instanceof java.util.List) {
+            List testedList = (List)collection;
+            for (int i=0; i < collectionSize; i++) {
+                testedList.add(i, getRandomIndex(collectionSize));
+            }
+            System.out.println("Testing population of List\tof " + testedList.size() + "\telements, time is: \t" + (System.currentTimeMillis() - startTime) );
         }
+        if (collection instanceof java.util.Set) {
+
+            Set testedSet = (Set) collection;
+            for (int i = 0; i < collectionSize; i++) {
+                testedSet.add(getRandomIndex(collectionSize));
+            }
+            System.out.println("Testing population of Set\tof " + testedSet.size() + "\telements, time is: \t" + (System.currentTimeMillis() - startTime) );
+        }
+        return System.currentTimeMillis() - startTime;
     }
 
     private int getRandomIndex (int elementsNumber) {
