@@ -12,14 +12,14 @@ public class OperationsTimeTest {
 
         startTime = System.currentTimeMillis();
 
-        testedList.add(getRandomNumber(testedList.size()), getRandomNumber(testedList.size()));
+        testedList.add(getRandomNumber(testedList.size()), item);
 
         return System.currentTimeMillis() - startTime;
     }
     public long testAdd (Set<Integer> testedSet, int item) {
 
         startTime = System.currentTimeMillis();
-        testedSet.add( getRandomNumber(item) );
+        testedSet.add( item );
 
         return System.currentTimeMillis() - startTime;
     }
@@ -32,7 +32,6 @@ public class OperationsTimeTest {
             for (int i=0; i < collectionSize; i++) {
                 testedList.add(i, i);
             }
-           //System.out.println("Testing population of List\tof " + testedList.size() + " \telements, time is: \t" + (System.currentTimeMillis() - startTime) );
         }
         if (collection instanceof java.util.Set) {
 
@@ -40,7 +39,6 @@ public class OperationsTimeTest {
             for (int i = 0; i < collectionSize; i++) {
                 testedSet.add(i);
             }
-            //System.out.println("Testing population of Set\tof " + testedSet.size() + " \telements, time is: \t" + (System.currentTimeMillis() - startTime) );
         }
         return System.currentTimeMillis() - startTime;
     }

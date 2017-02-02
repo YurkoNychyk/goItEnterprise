@@ -12,8 +12,8 @@ public class GraphicResults extends JFrame {
 
     public GraphicResults(String title) {
         super(title);
-        this.setBounds( (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 - 400), (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2 - 400), 400, 400 );
+        this.setBounds( 800,500, 400, 400 );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        this.setVisible(true);
     }
 }

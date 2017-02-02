@@ -29,6 +29,7 @@ public class Runner {
     private static final int MEASUREMENTS_NUMBER = 1;
 
     private static OperationsTimeTest tester = new OperationsTimeTest();
+    private static GraphicResults resultWindow;
 
     public static Map<String, Long> testResults = new HashMap<>();
 
@@ -72,8 +73,9 @@ public class Runner {
     public static void main(String[] args) {
 
         testPopulate();
-
-        printResultsToConsole();
+        testAdd();
+        showResults();
+        //printResultsToConsole();
 
 
     }
@@ -136,33 +138,20 @@ public class Runner {
             treeSet10kAveragePopulationTime += tester.testPopulate(tested10kTreeSet, FACTOR10K);
             treeSet100kAveragePopulationTime += tester.testPopulate(tested100kTreeSet, FACTOR100K);
             treeSet1000kAveragePopulationTime += tester.testPopulate(tested1000kTreeSet, FACTOR1000K);
-            System.out.println(System.currentTimeMillis() + " Populate measurement " + i + "\tfinished");
         }
 
         testResults.put(ARRAYLIST10KPOPULATERESULT, arrayList10kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(ARRAYLIST100KPOPULATERESULT, arrayList100kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(ARRAYLIST1000KPOPULATERESULT, arrayList1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        //arrayList10kAveragePopulationTime = arrayList10kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //arrayList100kAveragePopulationTime = arrayList100kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //arrayList1000kAveragePopulationTime = arrayList1000kAveragePopulationTime / MEASUREMENTS_NUMBER;
 
-        //linkedList10kAveragePopulationTime = linkedList10kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //linkedList100kAveragePopulationTime = linkedList100kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //linkedList1000kAveragePopulationTime = linkedList1000kAveragePopulationTime / MEASUREMENTS_NUMBER;
         testResults.put(LINKEDLIST10KPOPULATERESULT, linkedList10kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(LINKEDLIST100KPOPULATERESULT, linkedList100kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(LINKEDLIST1000KPOPULATERESULT, linkedList1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
 
-        //hashSet10kAveragePopulationTime = hashSet10kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //hashSet100kAveragePopulationTime = hashSet100kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //hashSet1000kAveragePopulationTime = hashSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER;
         testResults.put(HASHSET10KPOPULATERESULT, hashSet10kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(HASHSET100KPOPULATERESULT, hashSet100kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(HASHSET1000KPOPULATERESULT, hashSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
 
-        //treeSet10kAveragePopulationTime = treeSet10kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //treeSet100kAveragePopulationTime = treeSet100kAveragePopulationTime / MEASUREMENTS_NUMBER;
-        //treeSet1000kAveragePopulationTime = treeSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER;
         testResults.put(TREESET10KPOPULATERESULT, treeSet10kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(TREESET100KPOPULATERESULT, treeSet100kAveragePopulationTime / MEASUREMENTS_NUMBER);
         testResults.put(TREESET1000KPOPULATERESULT, treeSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
@@ -196,4 +185,10 @@ public class Runner {
             System.out.println(System.currentTimeMillis() + " Add measurement " + i + "\tfinished");
         }
     }
+
+    private static void showResults() {
+        resultWindow = new GraphicResults("Time complexity test results");
+
+    }
+
 }
