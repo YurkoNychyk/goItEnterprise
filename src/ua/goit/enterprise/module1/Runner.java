@@ -10,28 +10,35 @@ public class Runner {
     private static final int FACTOR100K = 100000;
     private static final int FACTOR1000K = 1000000;
 
-    public static final String ARRAYLIST10KPOPULATERESULT = "ArrayList 10K average population time";
-    public static final String ARRAYLIST100KPOPULATERESULT = "ArrayList 100K average population time";
-    public static final String ARRAYLIST1000KPOPULATERESULT = "ArrayList 1000K average population time";
-
-    public static final String LINKEDLIST10KPOPULATERESULT = "LinkedList 10K average population time";
-    public static final String LINKEDLIST100KPOPULATERESULT = "LinkedList 100K average population time";
-    public static final String LINKEDLIST1000KPOPULATERESULT = "LinkedList 1000K average population time";
-
-    public static final String HASHSET10KPOPULATERESULT = "HashSet 10K average population time";
-    public static final String HASHSET100KPOPULATERESULT = "HashSet 100K average population time";
-    public static final String HASHSET1000KPOPULATERESULT = "HashSet 1000K average population time";
-
-    public static final String TREESET10KPOPULATERESULT = "TreeSet 10K average population time";
-    public static final String TREESET100KPOPULATERESULT = "TreeSet 100K average population time";
-    public static final String TREESET1000KPOPULATERESULT = "TreeSet 1000K average population time";
-
     private static final int MEASUREMENTS_NUMBER = 1;
 
-    private static OperationsTimeTest tester = new OperationsTimeTest();
-    private static GraphicResults resultWindow;
+    private static final int FIRST_WINDOW_X_COORDINATE = 100;
+    private static final int WINDOWS_GAP = 20;
 
-    public static Map<String, Long> testResults = new HashMap<>();
+    public static final String ARRAYLIST_POPULATE_TEST_NAME = "ArrayList.populate";
+    public static final String ARRAYLIST_ADD_TEST_NAME = "ArrayList.add";
+
+
+    public static final String LINKEDLIST_POPULATE_TEST_NAME = "LinkedList.populate";
+    public static final String LINKEDLIST_ADD_TEST_NAME = "LinkedList 100K average population time";
+
+
+    public static final String HASHSET_POPULATE_TEST_NAME = "HashSet.populate";
+    public static final String HASHSET_ADD_TEST_NAME = "HashSet 100K average population time";
+
+
+    public static final String TREESET_POPULATE_TEST_NAME = "TreeSet.populate";
+    public static final String TREESET_ADD_TEST_NAME = "TreeSet 100K average population time";
+
+
+    private static OperationsTimeTest tester = new OperationsTimeTest();
+    private static GraphicResults resultWindow10K;
+    private static GraphicResults resultWindow100K;
+    private static GraphicResults resultWindow1000K;
+
+    public static Map<String, Long> testResults10K = new HashMap<>();
+    public static Map<String, Long> testResults100K = new HashMap<>();
+    public static Map<String, Long> testResults1000K = new HashMap<>();
 
 
     static long arrayList10kAveragePopulationTime = 0;
@@ -79,29 +86,6 @@ public class Runner {
 
 
     }
-    public static void printResultsToConsole()   {
-
-        System.out.println();
-        System.out.println(ARRAYLIST10KPOPULATERESULT + ":\t" + testResults.get(ARRAYLIST10KPOPULATERESULT) + "ms.");
-        System.out.println(ARRAYLIST100KPOPULATERESULT + ":\t" + testResults.get(ARRAYLIST100KPOPULATERESULT) + "ms.");
-        System.out.println(ARRAYLIST1000KPOPULATERESULT + ":\t" + testResults.get(ARRAYLIST1000KPOPULATERESULT) + "ms.");
-
-        System.out.println();
-        System.out.println(LINKEDLIST10KPOPULATERESULT + ":\t" + testResults.get(LINKEDLIST10KPOPULATERESULT) + "ms.");
-        System.out.println(LINKEDLIST100KPOPULATERESULT + ":\t" + testResults.get(LINKEDLIST100KPOPULATERESULT)+ "ms.");
-        System.out.println(LINKEDLIST1000KPOPULATERESULT + ":\t" + testResults.get(LINKEDLIST1000KPOPULATERESULT) + "ms.");
-
-        System.out.println();
-        System.out.println(HASHSET10KPOPULATERESULT + ":\t" + testResults.get(HASHSET10KPOPULATERESULT)+ "ms.");
-        System.out.println(HASHSET100KPOPULATERESULT + ":\t" + testResults.get(HASHSET100KPOPULATERESULT) + "ms.");
-        System.out.println(HASHSET1000KPOPULATERESULT + ":\t" + testResults.get(HASHSET1000KPOPULATERESULT) + "ms.");
-
-        System.out.println();
-        System.out.println(TREESET10KPOPULATERESULT + ":\t" + testResults.get(TREESET10KPOPULATERESULT) + "ms.");
-        System.out.println(TREESET100KPOPULATERESULT + ":\t" + testResults.get(TREESET100KPOPULATERESULT)+ "ms.");
-        System.out.println(TREESET1000KPOPULATERESULT + ":\t" + testResults.get(TREESET1000KPOPULATERESULT)+ "ms.");
-
-    }
 
     private static void testPopulate() {
 
@@ -140,21 +124,21 @@ public class Runner {
             treeSet1000kAveragePopulationTime += tester.testPopulate(tested1000kTreeSet, FACTOR1000K);
         }
 
-        testResults.put(ARRAYLIST10KPOPULATERESULT, arrayList10kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(ARRAYLIST100KPOPULATERESULT, arrayList100kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(ARRAYLIST1000KPOPULATERESULT, arrayList1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults10K.put(ARRAYLIST_POPULATE_TEST_NAME, arrayList10kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(ARRAYLIST_POPULATE_TEST_NAME, arrayList100kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults1000K.put(ARRAYLIST_POPULATE_TEST_NAME, arrayList1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
 
-        testResults.put(LINKEDLIST10KPOPULATERESULT, linkedList10kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(LINKEDLIST100KPOPULATERESULT, linkedList100kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(LINKEDLIST1000KPOPULATERESULT, linkedList1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults10K.put(LINKEDLIST_POPULATE_TEST_NAME, linkedList10kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(LINKEDLIST_POPULATE_TEST_NAME, linkedList100kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults1000K.put(LINKEDLIST_POPULATE_TEST_NAME, linkedList1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
 
-        testResults.put(HASHSET10KPOPULATERESULT, hashSet10kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(HASHSET100KPOPULATERESULT, hashSet100kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(HASHSET1000KPOPULATERESULT, hashSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults10K.put(HASHSET_POPULATE_TEST_NAME, hashSet10kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(HASHSET_POPULATE_TEST_NAME, hashSet100kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults1000K.put(HASHSET_POPULATE_TEST_NAME, hashSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
 
-        testResults.put(TREESET10KPOPULATERESULT, treeSet10kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(TREESET100KPOPULATERESULT, treeSet100kAveragePopulationTime / MEASUREMENTS_NUMBER);
-        testResults.put(TREESET1000KPOPULATERESULT, treeSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults10K.put(TREESET_POPULATE_TEST_NAME, treeSet10kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(TREESET_POPULATE_TEST_NAME, treeSet100kAveragePopulationTime / MEASUREMENTS_NUMBER);
+        testResults1000K.put(TREESET_POPULATE_TEST_NAME, treeSet1000kAveragePopulationTime / MEASUREMENTS_NUMBER);
 
 
 
@@ -187,8 +171,9 @@ public class Runner {
     }
 
     private static void showResults() {
-        resultWindow = new GraphicResults("Time complexity test results");
-
+        resultWindow10K = new GraphicResults("10K Collection operation time complexity test results",FIRST_WINDOW_X_COORDINATE, testResults10K);
+        resultWindow100K = new GraphicResults("100K Collection operation time complexity test results",resultWindow10K.getWidth() + FIRST_WINDOW_X_COORDINATE + WINDOWS_GAP, testResults100K);
+        resultWindow1000K = new GraphicResults("1000K Collection operation time complexity test results", resultWindow100K.getWidth() + resultWindow100K.getX() + WINDOWS_GAP,testResults1000K);
     }
 
 }
