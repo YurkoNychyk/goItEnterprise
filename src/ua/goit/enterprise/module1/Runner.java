@@ -81,6 +81,13 @@ public class Runner {
 
         testPopulate();
         testAdd();
+        System.out.print(testResults10K.size() + "\t");
+        System.out.println(testResults10K );
+        System.out.print(testResults100K.size() + "\t");
+        System.out.println(testResults100K);
+        System.out.print(testResults1000K.size()+ "\t");
+        System.out.println(testResults1000K);
+
         showResults();
         //printResultsToConsole();
 
