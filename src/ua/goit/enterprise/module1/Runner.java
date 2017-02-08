@@ -15,20 +15,20 @@ public class Runner {
     private static final int FIRST_WINDOW_X_COORDINATE = 100;
     private static final int WINDOWS_GAP = 20;
 
-    public static final String ARRAYLIST_POPULATE_TEST_NAME = "ArrayList.populate";
+    public static final String ARRAYLIST_POPULATE_TEST_NAME = "ArrayList, populate";
     public static final String ARRAYLIST_ADD_TEST_NAME = "ArrayList.add";
 
 
-    public static final String LINKEDLIST_POPULATE_TEST_NAME = "LinkedList.populate";
-    public static final String LINKEDLIST_ADD_TEST_NAME = "LinkedList 100K average population time";
+    public static final String LINKEDLIST_POPULATE_TEST_NAME = "LinkedList, populate";
+    public static final String LINKEDLIST_ADD_TEST_NAME = "LinkedList, add";
 
 
-    public static final String HASHSET_POPULATE_TEST_NAME = "HashSet.populate";
-    public static final String HASHSET_ADD_TEST_NAME = "HashSet 100K average population time";
+    public static final String HASHSET_POPULATE_TEST_NAME = "HashSet, populate";
+    public static final String HASHSET_ADD_TEST_NAME = "HashSet, add";
 
 
-    public static final String TREESET_POPULATE_TEST_NAME = "TreeSet.populate";
-    public static final String TREESET_ADD_TEST_NAME = "TreeSet 100K average population time";
+    public static final String TREESET_POPULATE_TEST_NAME = "TreeSet, populate";
+    public static final String TREESET_ADD_TEST_NAME = "TreeSet, add";
 
 
     private static OperationsTimeTest tester = new OperationsTimeTest();
