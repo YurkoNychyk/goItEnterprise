@@ -16,7 +16,7 @@ public class Runner {
     private static final int WINDOWS_GAP = 20;
 
     public static final String ARRAYLIST_POPULATE_TEST_NAME = "ArrayList, populate";
-    public static final String ARRAYLIST_ADD_TEST_NAME = "ArrayList.add";
+    public static final String ARRAYLIST_ADD_TEST_NAME = "ArrayList, add";
 
 
     public static final String LINKEDLIST_POPULATE_TEST_NAME = "LinkedList, populate";
@@ -57,7 +57,21 @@ public class Runner {
     static long treeSet100kAveragePopulationTime = 0;
     static long treeSet1000kAveragePopulationTime = 0;
 
+    static long arrayList10kAverageAddTime = 0;
+    static long arrayList100kAverageAddTime = 0;
+    static long arrayList1000kAverageAddTime = 0;
 
+    static long linkedList10kAverageAddTime = 0;
+    static long linkedList100kAverageAddTime = 0;
+    static long linkedList1000kAverageAddTime = 0;
+
+    static long hashSet10kAverageAddTime = 0;
+    static long hashSet100kAverageAddTime = 0;
+    static long hashSet1000kAverageAddTime = 0;
+
+    static long treeSet10kAverageAddTime = 0;
+    static long treeSet100kAverageAddTime = 0;
+    static long treeSet1000kAverageAddTime = 0;
 
     static List<Integer> tested10kArrayList;
     static List<Integer> tested100kArrayList;
@@ -154,27 +168,47 @@ public class Runner {
     private static void testAdd(){
         for(int i = 0; i <= MEASUREMENTS_NUMBER; i++)   {
             int randomIndex = (int) (Math.floor( Math.random() * (tested10kArrayList.size()+1) )) ;
-            tester.testAdd(tested10kArrayList, randomIndex);
-            tester.testAdd(tested10kLinkedList, randomIndex);
+            arrayList10kAverageAddTime += tester.testAdd(tested10kArrayList, randomIndex);
+            linkedList10kAverageAddTime += tester.testAdd(tested10kLinkedList, randomIndex);
 
             randomIndex = (int) (Math.floor( Math.random() * (tested100kArrayList.size()+1) )) ;
-            tester.testAdd(tested100kArrayList, randomIndex);
-            tester.testAdd(tested100kLinkedList, randomIndex);
+            arrayList100kAverageAddTime += tester.testAdd(tested100kArrayList, randomIndex);
+            linkedList100kAverageAddTime += tester.testAdd(tested100kLinkedList, randomIndex);
 
             randomIndex = (int) (Math.floor( Math.random() * (tested1000kArrayList.size()+1) )) ;
-            tester.testAdd(tested1000kArrayList, randomIndex);
-            tester.testAdd(tested1000kLinkedList, randomIndex);
+            arrayList1000kAverageAddTime += tester.testAdd(tested1000kArrayList, randomIndex);
+            linkedList1000kAverageAddTime += tester.testAdd(tested1000kLinkedList, randomIndex);
 
 
             randomIndex = (int) (Math.floor( Math.random() * (tested10kHashSet.size()+1) )) ;
-            tester.testAdd(tested10kHashSet, randomIndex);
+            hashSet10kAverageAddTime += tester.testAdd(tested10kHashSet, randomIndex);
             randomIndex = (int) (Math.floor( Math.random() * (tested100kHashSet.size()+1) )) ;
-            tester.testAdd(tested100kHashSet, randomIndex);
+            hashSet100kAverageAddTime += tester.testAdd(tested100kHashSet, randomIndex);
             randomIndex = (int) (Math.floor( Math.random() * (tested1000kHashSet.size()+1) )) ;
-            tester.testAdd(tested1000kHashSet, randomIndex);
+            hashSet1000kAverageAddTime += tester.testAdd(tested1000kHashSet, randomIndex);
 
-            System.out.println(System.currentTimeMillis() + " Add measurement " + i + "\tfinished");
+            randomIndex = (int) (Math.floor( Math.random() * (tested10kTreeSet.size()+1) )) ;
+            treeSet10kAverageAddTime += tester.testAdd(tested10kTreeSet, randomIndex);
+            randomIndex = (int) (Math.floor( Math.random() * (tested100kTreeSet.size()+1) )) ;
+            treeSet100kAverageAddTime += tester.testAdd(tested100kTreeSet, randomIndex);
+            randomIndex = (int) (Math.floor( Math.random() * (tested1000kTreeSet.size()+1) )) ;
+            treeSet1000kAverageAddTime += tester.testAdd(tested1000kTreeSet, randomIndex);
         }
+        testResults10K.put(ARRAYLIST_ADD_TEST_NAME, arrayList10kAverageAddTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(ARRAYLIST_ADD_TEST_NAME, arrayList100kAverageAddTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(ARRAYLIST_ADD_TEST_NAME, arrayList1000kAverageAddTime/ MEASUREMENTS_NUMBER);
+
+        testResults10K.put(LINKEDLIST_ADD_TEST_NAME, linkedList10kAverageAddTime/ MEASUREMENTS_NUMBER);
+        testResults100K.put(LINKEDLIST_ADD_TEST_NAME, linkedList100kAverageAddTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(LINKEDLIST_ADD_TEST_NAME, linkedList1000kAverageAddTime/ MEASUREMENTS_NUMBER);
+
+        testResults10K.put(HASHSET_ADD_TEST_NAME, hashSet10kAverageAddTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(HASHSET_ADD_TEST_NAME, hashSet100kAverageAddTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(HASHSET_ADD_TEST_NAME, hashSet1000kAverageAddTime/ MEASUREMENTS_NUMBER);
+
+        testResults10K.put(TREESET_ADD_TEST_NAME, treeSet10kAverageAddTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(TREESET_ADD_TEST_NAME, treeSet100kAverageAddTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(TREESET_ADD_TEST_NAME, treeSet1000kAverageAddTime/ MEASUREMENTS_NUMBER);
     }
 
     private static void showResults() {

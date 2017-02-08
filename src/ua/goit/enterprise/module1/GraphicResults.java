@@ -13,32 +13,45 @@ public class GraphicResults extends JFrame {
     private String[] colNames;
     private Set<String> firstCol;
     private Set<String> colNamesSet;
+    private final long DEFAULT_VALUE = 999l;
 
     public GraphicResults(String title, int x ,Map<String, Long> data) {
         super(title);
         this.setBounds( x,500, 400, 400 );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.firstCol = new TreeSet<>();
-        this.colNamesSet = new HashSet<>();
+        firstCol = new TreeSet<>();
+        colNamesSet = new HashSet<>();
 
         for ( Map.Entry entry:data.entrySet() ) {
-            String entryKey[];
+            String entryKey[] = {"null","null"};
             entryKey = entry.getKey().toString().split(", ");
-                this.firstCol.add(entryKey[0]);
-                this.colNamesSet.add(entryKey[1]);
+                firstCol.add(entryKey[0]);
+                colNamesSet.add(entryKey[1]);
         }
 
-        colNames = colNamesSet.toArray(new String[colNamesSet.size()]);
-        this.data = new String[data.size()][colNames.length];
-        for (int row = 0; row < this.data.length; row++)    {
-            if (this.firstCol.iterator().hasNext())
-            this.data[row][0] = this.firstCol.iterator().next();
-
-            for (int col = 0; col <colNames.length; col++ ) {
-                if (col == 0) this.data[0][col] = colNames[col];
+        colNames = colNamesSet.toArray(new String[colNamesSet.size()+1]);
+        for (int i = colNames.length - 1; i >= 0; i --){
+            if (i == 0) {
+                colNames[i] = "Collection Name";
+            }
+            else {
+                colNames[i] = colNames[i - 1];
             }
         }
+        this.data = new String[data.size()][colNames.length];
 
+
+        Iterator iter = firstCol.iterator();
+        for (int row = 0; row < this.data.length; row++)    {
+            if (iter.hasNext())
+            this.data[row][0] = iter.next().toString();
+
+            for (int col = 1; col <colNames.length; col++ ) {
+                    String initialKey = this.data[row][0] + ", " + colNames[col];
+                    this.data[row][col] = data.getOrDefault(initialKey, DEFAULT_VALUE).toString();
+                }
+
+            }
 
         resultTable = new JTable(this.data, this.colNames);
 
