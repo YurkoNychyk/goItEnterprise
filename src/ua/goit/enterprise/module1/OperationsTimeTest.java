@@ -24,6 +24,30 @@ public class OperationsTimeTest {
         return System.currentTimeMillis() - startTime;
     }
 
+    public long testGet(List<Integer>testedList, int item){
+
+        startTime = System.currentTimeMillis();
+        testedList.get(item);
+
+        return System.currentTimeMillis() - startTime;
+    }
+
+    public long testRemove(Set<Integer> testedSet, int item){
+
+        startTime = System.currentTimeMillis();
+        System.out.println( testedSet.remove(item) );
+        return System.currentTimeMillis() - startTime;
+
+    }
+
+    public long testContains(Collection<Integer> testedCollection, int item){
+
+        startTime = System.currentTimeMillis();
+        testedCollection.contains(item);
+
+        return System.currentTimeMillis() - startTime;
+    }
+
     public long testPopulate(Collection<Integer> collection, int collectionSize) {
         startTime = System.currentTimeMillis();
 

@@ -17,18 +17,24 @@ public class Runner {
 
     public static final String ARRAYLIST_POPULATE_TEST_NAME = "ArrayList, populate";
     public static final String ARRAYLIST_ADD_TEST_NAME = "ArrayList, add";
-
+    public static final String ARRAYLIST_GET_TEST_NAME = "ArrayList, get";
+    public static final String ARRAYLIST_CONTAINS_TEST_NAME = "ArrayList, contains";
 
     public static final String LINKEDLIST_POPULATE_TEST_NAME = "LinkedList, populate";
     public static final String LINKEDLIST_ADD_TEST_NAME = "LinkedList, add";
-
+    public static final String LINKEDLIST_GET_TEST_NAME = "LinkedList, get";
+    public static final String LINKEDLIST_CONTAINS_TEST_NAME = "LinkedList, contains";
 
     public static final String HASHSET_POPULATE_TEST_NAME = "HashSet, populate";
     public static final String HASHSET_ADD_TEST_NAME = "HashSet, add";
-
+    public static final String HASHSET_REMOVE_TEST_NAME = "HashSet, remove";
+    public static final String HASHSET_CONTAINS_TEST_NAME = "HashSet, contains";
 
     public static final String TREESET_POPULATE_TEST_NAME = "TreeSet, populate";
     public static final String TREESET_ADD_TEST_NAME = "TreeSet, add";
+    public static final String TREESET_REMOVE_TEST_NAME = "TreeSet, remove";
+    public static final String TREESET_CONTAINS_TEST_NAME = "TreeSet, contains";
+
 
 
     private static OperationsTimeTest tester = new OperationsTimeTest();
@@ -73,6 +79,39 @@ public class Runner {
     static long treeSet100kAverageAddTime = 0;
     static long treeSet1000kAverageAddTime = 0;
 
+    static long arrayList10kAverageGetTime = 0;
+    static long arrayList100kAverageGetTime = 0;
+    static long arrayList1000kAverageGetTime = 0;
+
+    static long linkedList10kAverageGetTime = 0;
+    static long linkedList100kAverageGetTime = 0;
+    static long linkedList1000kAverageGetTime = 0;
+
+    static long hashSet10kAverageRemoveTime = 0;
+    static long hashSet100kAverageRemoveTime = 0;
+    static long hashSet1000kAverageRemoveTime = 0;
+
+    static long treeSet10kAverageRemoveTime = 0;
+    static long treeSet100kAverageRemoveTime = 0;
+    static long treeSet1000kAverageRemoveTime = 0;
+
+    static long arrayList10kAverageContainsTime = 0;
+    static long arrayList100kAverageContainsTime = 0;
+    static long arrayList1000kAverageContainsTime = 0;
+
+    static long linkedList10kAverageContainsTime = 0;
+    static long linkedList100kAverageContainsTime = 0;
+    static long linkedList1000kAverageContainsTime = 0;
+
+    static long hashSet10kAverageContainsTime = 0;
+    static long hashSet100kAverageContainsTime = 0;
+    static long hashSet1000kAverageContainsTime = 0;
+
+    static long treeSet10kAverageContainsTime = 0;
+    static long treeSet100kAverageContainsTime = 0;
+    static long treeSet1000kAverageContainsTime = 0;
+
+
     static List<Integer> tested10kArrayList;
     static List<Integer> tested100kArrayList;
     static List<Integer> tested1000kArrayList;
@@ -95,6 +134,10 @@ public class Runner {
 
         testPopulate();
         testAdd();
+        testGet();
+        testRemove();
+        testContains();
+
         System.out.print(testResults10K.size() + "\t");
         System.out.println(testResults10K );
         System.out.print(testResults100K.size() + "\t");
@@ -209,6 +252,100 @@ public class Runner {
         testResults10K.put(TREESET_ADD_TEST_NAME, treeSet10kAverageAddTime / MEASUREMENTS_NUMBER);
         testResults100K.put(TREESET_ADD_TEST_NAME, treeSet100kAverageAddTime/ MEASUREMENTS_NUMBER);
         testResults1000K.put(TREESET_ADD_TEST_NAME, treeSet1000kAverageAddTime/ MEASUREMENTS_NUMBER);
+    }
+
+    private static void testGet(){
+        for(int i = 0; i <= MEASUREMENTS_NUMBER; i++)   {
+            int randomIndex = (int) (Math.floor( Math.random() * (tested10kArrayList.size()+1) )) ;
+            arrayList10kAverageGetTime += tester.testGet(tested10kArrayList, randomIndex);
+            linkedList10kAverageGetTime += tester.testGet(tested10kLinkedList, randomIndex);
+
+            randomIndex = (int) (Math.floor( Math.random() * (tested100kArrayList.size()+1) )) ;
+            arrayList100kAverageGetTime += tester.testGet(tested100kArrayList, randomIndex);
+            linkedList100kAverageGetTime += tester.testGet(tested100kLinkedList, randomIndex);
+
+            randomIndex = (int) (Math.floor( Math.random() * (tested1000kArrayList.size()+1) )) ;
+            arrayList1000kAverageGetTime += tester.testGet(tested1000kArrayList, randomIndex);
+            linkedList1000kAverageGetTime += tester.testGet(tested1000kLinkedList, randomIndex);
+        }
+        testResults10K.put(ARRAYLIST_GET_TEST_NAME, arrayList10kAverageGetTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(ARRAYLIST_GET_TEST_NAME, arrayList100kAverageGetTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(ARRAYLIST_GET_TEST_NAME, arrayList1000kAverageGetTime/ MEASUREMENTS_NUMBER);
+
+        testResults10K.put(LINKEDLIST_GET_TEST_NAME, linkedList10kAverageGetTime/ MEASUREMENTS_NUMBER);
+        testResults100K.put(LINKEDLIST_GET_TEST_NAME, linkedList100kAverageGetTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(LINKEDLIST_GET_TEST_NAME, linkedList1000kAverageGetTime/ MEASUREMENTS_NUMBER);
+    }
+
+    private static void testRemove() {
+        for (int i = 0; i <= MEASUREMENTS_NUMBER; i++) {
+            int randomIndex = (int) (Math.floor(Math.random() * (tested10kHashSet.size() + 1)));
+            hashSet10kAverageRemoveTime += tester.testRemove(tested10kHashSet, randomIndex);
+            randomIndex = (int) (Math.floor(Math.random() * (tested100kHashSet.size() + 1)));
+            hashSet100kAverageRemoveTime += tester.testRemove(tested100kHashSet, randomIndex);
+            randomIndex = (int) (Math.floor(Math.random() * (tested1000kHashSet.size() + 1)));
+            hashSet1000kAverageRemoveTime += tester.testRemove(tested1000kHashSet, randomIndex);
+
+            randomIndex = (int) (Math.floor(Math.random() * (tested10kTreeSet.size() + 1)));
+            treeSet10kAverageRemoveTime += tester.testRemove(tested10kTreeSet, randomIndex);
+            randomIndex = (int) (Math.floor(Math.random() * (tested100kTreeSet.size() + 1)));
+            treeSet100kAverageRemoveTime += tester.testRemove(tested100kTreeSet, randomIndex);
+            randomIndex = (int) (Math.floor(Math.random() * (tested1000kTreeSet.size() + 1)));
+            treeSet1000kAverageRemoveTime += tester.testRemove(tested1000kTreeSet, randomIndex);
+        }
+
+        testResults10K.put(HASHSET_REMOVE_TEST_NAME, hashSet10kAverageRemoveTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(HASHSET_REMOVE_TEST_NAME, hashSet100kAverageRemoveTime / MEASUREMENTS_NUMBER);
+        testResults1000K.put(HASHSET_REMOVE_TEST_NAME, hashSet1000kAverageRemoveTime / MEASUREMENTS_NUMBER);
+
+        testResults10K.put(TREESET_REMOVE_TEST_NAME, treeSet10kAverageRemoveTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(TREESET_REMOVE_TEST_NAME, treeSet100kAverageRemoveTime / MEASUREMENTS_NUMBER);
+        testResults1000K.put(TREESET_REMOVE_TEST_NAME, treeSet1000kAverageRemoveTime / MEASUREMENTS_NUMBER);
+    }
+
+    private static void testContains()  {
+        for(int i = 0; i <= MEASUREMENTS_NUMBER; i++)   {
+            int randomIndex = (int) (Math.floor( Math.random() * (tested10kArrayList.size()+1) )) ;
+            arrayList10kAverageContainsTime += tester.testContains(tested10kArrayList, randomIndex);
+            linkedList10kAverageContainsTime += tester.testContains(tested10kLinkedList, randomIndex);
+
+            randomIndex = (int) (Math.floor( Math.random() * (tested100kArrayList.size()+1) )) ;
+            arrayList100kAverageContainsTime += tester.testContains(tested100kArrayList, randomIndex);
+            linkedList100kAverageContainsTime += tester.testContains(tested100kLinkedList, randomIndex);
+
+            randomIndex = (int) (Math.floor( Math.random() * (tested1000kArrayList.size()+1) )) ;
+            arrayList1000kAverageContainsTime += tester.testContains(tested1000kArrayList, randomIndex);
+            linkedList1000kAverageContainsTime += tester.testContains(tested1000kLinkedList, randomIndex);
+
+            randomIndex = (int) (Math.floor( Math.random() * (tested10kHashSet.size()+1) )) ;
+            hashSet10kAverageContainsTime += tester.testContains(tested10kHashSet, randomIndex);
+            randomIndex = (int) (Math.floor( Math.random() * (tested100kHashSet.size()+1) )) ;
+            hashSet100kAverageContainsTime += tester.testContains(tested100kHashSet, randomIndex);
+            randomIndex = (int) (Math.floor( Math.random() * (tested1000kHashSet.size()+1) )) ;
+            hashSet1000kAverageContainsTime += tester.testContains(tested1000kHashSet, randomIndex);
+
+            randomIndex = (int) (Math.floor( Math.random() * (tested10kTreeSet.size()+1) )) ;
+            treeSet10kAverageContainsTime += tester.testContains(tested10kTreeSet, randomIndex);
+            randomIndex = (int) (Math.floor( Math.random() * (tested100kTreeSet.size()+1) )) ;
+            treeSet100kAverageContainsTime += tester.testContains(tested100kTreeSet, randomIndex);
+            randomIndex = (int) (Math.floor( Math.random() * (tested1000kTreeSet.size()+1) )) ;
+            treeSet1000kAverageContainsTime += tester.testContains(tested1000kTreeSet, randomIndex);
+        }
+        testResults10K.put(ARRAYLIST_CONTAINS_TEST_NAME, arrayList10kAverageContainsTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(ARRAYLIST_CONTAINS_TEST_NAME, arrayList100kAverageContainsTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(ARRAYLIST_CONTAINS_TEST_NAME, arrayList1000kAverageContainsTime/ MEASUREMENTS_NUMBER);
+
+        testResults10K.put(LINKEDLIST_CONTAINS_TEST_NAME, linkedList10kAverageContainsTime/ MEASUREMENTS_NUMBER);
+        testResults100K.put(LINKEDLIST_CONTAINS_TEST_NAME, linkedList100kAverageContainsTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(LINKEDLIST_CONTAINS_TEST_NAME, linkedList1000kAverageContainsTime/ MEASUREMENTS_NUMBER);
+
+        testResults10K.put(HASHSET_CONTAINS_TEST_NAME, hashSet10kAverageContainsTime / MEASUREMENTS_NUMBER);
+        testResults100K.put(HASHSET_CONTAINS_TEST_NAME, hashSet100kAverageContainsTime / MEASUREMENTS_NUMBER);
+        testResults1000K.put(HASHSET_CONTAINS_TEST_NAME, hashSet1000kAverageContainsTime/ MEASUREMENTS_NUMBER);
+
+        testResults10K.put(TREESET_CONTAINS_TEST_NAME, treeSet10kAverageContainsTime/ MEASUREMENTS_NUMBER);
+        testResults100K.put(TREESET_CONTAINS_TEST_NAME, treeSet100kAverageContainsTime/ MEASUREMENTS_NUMBER);
+        testResults1000K.put(TREESET_CONTAINS_TEST_NAME, treeSet1000kAverageContainsTime/ MEASUREMENTS_NUMBER);
     }
 
     private static void showResults() {
