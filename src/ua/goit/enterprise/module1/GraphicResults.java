@@ -38,7 +38,7 @@ public class GraphicResults extends JFrame {
                 colNames[i] = colNames[i - 1];
             }
         }
-        this.data = new String[data.size()][colNames.length];
+        this.data = new String[(data.size() / colNamesSet.size()) + 1][colNames.length];
 
 
         Iterator iter = firstCol.iterator();
@@ -48,10 +48,13 @@ public class GraphicResults extends JFrame {
 
             for (int col = 1; col <colNames.length; col++ ) {
                     String initialKey = this.data[row][0] + ", " + colNames[col];
-                    this.data[row][col] = data.getOrDefault(initialKey, DEFAULT_VALUE).toString();
+                    Long longItem = data.getOrDefault(initialKey, DEFAULT_VALUE);
+                    String stringItem = Long.toString(longItem);
+                    this.data[row][col] = (longItem == DEFAULT_VALUE) ?  "" : stringItem ;
                 }
 
             }
+        System.out.println("Data array size" + this.data.length);
 
         resultTable = new JTable(this.data, this.colNames);
 
@@ -60,6 +63,7 @@ public class GraphicResults extends JFrame {
 
         this.add(scrollPane);
         this.setVisible(true);
+        this.pack();
     }
 
 }
