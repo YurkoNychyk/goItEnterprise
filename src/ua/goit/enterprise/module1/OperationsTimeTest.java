@@ -20,7 +20,7 @@ public class OperationsTimeTest {
     public long testAdd (Set<Integer> testedSet, int item) {
 
         startTime = System.nanoTime();
-        System.out.println( "set.add(): " + testedSet.add( item ) + "\t" + item );
+        testedSet.add( item );
 
         return (System.nanoTime() - startTime) / TIMEDIVIDER;
     }
@@ -36,7 +36,7 @@ public class OperationsTimeTest {
     public long testRemove(Set<Integer> testedSet, int item){
 
         startTime = System.nanoTime();
-        System.out.println("set.remove(): " + testedSet.remove(item) + "\t" + item);
+        testedSet.remove(item);
         return (System.nanoTime() - startTime) / TIMEDIVIDER;
 
     }
@@ -72,7 +72,7 @@ public class OperationsTimeTest {
 
         int currentMeasurement = 0;
         long operationTime = 0;
-        ListIterator<Integer> iter = testedCollection.listIterator();
+        ListIterator<Integer> iter = testedCollection.listIterator(item);
 
         while (currentMeasurement < measurementsNumber){
             startTime = System.nanoTime();
@@ -84,16 +84,18 @@ public class OperationsTimeTest {
 
     }
 
-    public long testIteratorRemove(Set<Integer> testedCollection, int measurementsNumber){
+    public long testIteratorRemove(Collection<Integer> testedCollection, int measurementsNumber){
         int currentMeasurement = 0;
         long operationTime = 0;
         Iterator<Integer> iter = testedCollection.iterator();
 
         while (currentMeasurement < measurementsNumber){
             startTime = System.nanoTime();
+            iter.next();
             iter.remove();
             operationTime += System.nanoTime()- startTime;
             currentMeasurement++;
+
         }
         return operationTime / measurementsNumber / TIMEDIVIDER ;
     }

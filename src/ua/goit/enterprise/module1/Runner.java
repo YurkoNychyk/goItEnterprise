@@ -12,7 +12,9 @@ public class Runner {
 
     private static final int MEASUREMENTS_NUMBER = 100;
 
-    private static final int FIRST_WINDOW_X_COORDINATE = 100;
+    private static final int FIRST_WINDOW_X_COORDINATE = 10;
+    private static final int FIRST_WINDOW_Y_COORDINATE = 10;
+    private static final int WINDOW_DEFAULT_HEIGHT = 150;
     private static final int WINDOWS_GAP = 20;
 
     public static final String ARRAYLIST_POPULATE_TEST_NAME = "ArrayList, populate";
@@ -33,13 +35,13 @@ public class Runner {
     public static final String HASHSET_ADD_TEST_NAME = "HashSet, add";
     public static final String HASHSET_REMOVE_TEST_NAME = "HashSet, remove";
     public static final String HASHSET_CONTAINS_TEST_NAME = "HashSet, contains";
+    public static final String HASHSET_ITERATOR_REMOVE_TEST_NAME = "HashSet, iterator.remove";
 
     public static final String TREESET_POPULATE_TEST_NAME = "TreeSet, populate";
     public static final String TREESET_ADD_TEST_NAME = "TreeSet, add";
     public static final String TREESET_REMOVE_TEST_NAME = "TreeSet, remove";
     public static final String TREESET_CONTAINS_TEST_NAME = "TreeSet, contains";
-
-
+    public static final String TREESET_ITERATOR_REMOVE_TEST_NAME = "TreeSet, iterator.remove";
 
     private static OperationsTimeTest tester = new OperationsTimeTest();
     private static GraphicResults resultWindow10K;
@@ -49,7 +51,6 @@ public class Runner {
     public static Map<String, Long> testResults10K = new HashMap<>();
     public static Map<String, Long> testResults100K = new HashMap<>();
     public static Map<String, Long> testResults1000K = new HashMap<>();
-
 
     static long arrayList10kAveragePopulationTime = 0;
     static long arrayList100kAveragePopulationTime = 0;
@@ -142,12 +143,10 @@ public class Runner {
         testRemove();
         testContains();
         testIteratorAdd();
+        testIteratorRemove();
 
-        System.out.print(testResults10K.size() + "\t");
         System.out.println(testResults10K );
-        System.out.print(testResults100K.size() + "\t");
         System.out.println(testResults100K);
-        System.out.print(testResults1000K.size()+ "\t");
         System.out.println(testResults1000K);
 
         showResults();
@@ -358,10 +357,31 @@ public class Runner {
         testResults1000K.put(LINKEDLIST_ITERATOR_ADD_TEST_NAME, tester.testIteratorAdd(tested1000kLinkedList,randomIndex,MEASUREMENTS_NUMBER ));
     }
 
+    private static void testIteratorRemove() {
+
+        testResults10K.put(ARRAYLIST_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested10kArrayList,MEASUREMENTS_NUMBER ));
+        testResults100K.put(ARRAYLIST_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested100kArrayList,MEASUREMENTS_NUMBER ));
+        testResults1000K.put(ARRAYLIST_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested1000kArrayList,MEASUREMENTS_NUMBER ));
+
+        testResults10K.put(LINKEDLIST_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested10kLinkedList,MEASUREMENTS_NUMBER ));
+        testResults100K.put(LINKEDLIST_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested100kLinkedList,MEASUREMENTS_NUMBER ));
+        testResults1000K.put(LINKEDLIST_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested1000kLinkedList,MEASUREMENTS_NUMBER ));
+
+        testResults10K.put(HASHSET_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested10kHashSet,MEASUREMENTS_NUMBER ));
+        testResults100K.put(HASHSET_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested100kHashSet,MEASUREMENTS_NUMBER ));
+        testResults1000K.put(HASHSET_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested1000kHashSet,MEASUREMENTS_NUMBER ));
+
+        testResults10K.put(TREESET_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested10kTreeSet,MEASUREMENTS_NUMBER ));
+        testResults100K.put(TREESET_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested100kTreeSet,MEASUREMENTS_NUMBER ));
+        testResults1000K.put(TREESET_ITERATOR_REMOVE_TEST_NAME, tester.testIteratorRemove(tested1000kTreeSet,MEASUREMENTS_NUMBER ));
+
+    }
+
+
     private static void showResults() {
-        resultWindow10K = new GraphicResults("10K Collection operation time complexity test results",FIRST_WINDOW_X_COORDINATE, testResults10K);
-        resultWindow100K = new GraphicResults("100K Collection operation time complexity test results",resultWindow10K.getWidth() + FIRST_WINDOW_X_COORDINATE + WINDOWS_GAP, testResults100K);
-        resultWindow1000K = new GraphicResults("1000K Collection operation time complexity test results", resultWindow100K.getWidth() + resultWindow100K.getX() + WINDOWS_GAP,testResults1000K);
+        resultWindow10K = new GraphicResults("10K Collection operation time complexity test results",FIRST_WINDOW_X_COORDINATE, FIRST_WINDOW_Y_COORDINATE,WINDOW_DEFAULT_HEIGHT, testResults10K);
+        resultWindow100K = new GraphicResults("100K Collection operation time complexity test results",FIRST_WINDOW_X_COORDINATE,resultWindow10K.getY() + resultWindow10K.getHeight()  + WINDOWS_GAP, WINDOW_DEFAULT_HEIGHT, testResults100K);
+        resultWindow1000K = new GraphicResults("1000K Collection operation time complexity test results", FIRST_WINDOW_X_COORDINATE,resultWindow100K.getY() +resultWindow100K.getHeight() +  + WINDOWS_GAP,WINDOW_DEFAULT_HEIGHT, testResults1000K);
     }
 
 }

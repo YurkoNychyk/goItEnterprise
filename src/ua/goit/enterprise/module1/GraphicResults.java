@@ -15,9 +15,9 @@ public class GraphicResults extends JFrame {
     private Set<String> colNamesSet;
     private final long DEFAULT_VALUE = 999l;
 
-    public GraphicResults(String title, int x ,Map<String, Long> data) {
+    public GraphicResults(String title, int x, int y, int height ,Map<String, Long> data) {
         super(title);
-        this.setBounds( x,500, 400, 400 );
+        this.setBounds( x,y, 1000, height );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         firstCol = new TreeSet<>();
         colNamesSet = new HashSet<>();
@@ -46,7 +46,7 @@ public class GraphicResults extends JFrame {
             if (iter.hasNext())
             this.data[row][0] = iter.next().toString();
 
-            for (int col = 1; col <colNames.length; col++ ) {
+            for (int col = 1; col < colNames.length; col++ ) {
                     String initialKey = this.data[row][0] + ", " + colNames[col];
                     Long longItem = data.getOrDefault(initialKey, DEFAULT_VALUE);
                     String stringItem = Long.toString(longItem);
@@ -54,7 +54,6 @@ public class GraphicResults extends JFrame {
                 }
 
             }
-        System.out.println("Data array size" + this.data.length);
 
         resultTable = new JTable(this.data, this.colNames);
 
@@ -63,7 +62,6 @@ public class GraphicResults extends JFrame {
 
         this.add(scrollPane);
         this.setVisible(true);
-        this.pack();
     }
 
 }
